@@ -1,0 +1,65 @@
+import tkinter as tk
+root = tk.Tk()
+#In ra dòng chữ
+root.title("Bảng thông tin")
+root.geometry("1000x325")#Độ lớn khung
+label = tk.Label(root, text="Thông tin nhân viên", font=("Arial", 18,"bold"))
+label.place(x = 20, y = 20)  
+#Tạo ô phân biệt khách hàng với nhà cung cấp
+def phanbiet(selected):
+    for var in vuong:
+        if var != selected:
+            var.set(False)
+    print(f"Thông tin: {'Khách Hàng' if vuong[0].get() else 'Nhà cung cấp'}")
+vuong = [tk.BooleanVar(value=False), tk.BooleanVar(value=False)]
+checkbox1 = tk.Checkbutton(root, text="Là khách hàng", variable=vuong[0], 
+                           command=lambda: phanbiet(vuong[0]),font=("Arial",11))
+checkbox2 = tk.Checkbutton(root, text="Là nhà cung cấp", variable=vuong[1], 
+                          command=lambda: phanbiet(vuong[1]),font=("Arial",11))
+# Vị trí ô
+checkbox1.place(x = 290, y = 25)
+checkbox2.place(x = 480, y = 25)
+# Danh sách nhãn và ô nhập
+labels = ["Mã", "Đơn vị", "Chức danh"]
+entries = []
+y_position = 80
+for i, label in enumerate(labels):
+    # Tạo nhãn
+    tk.Label(root, text=label, font=("Arial", 11,"bold")).place(x=20, y=y_position)
+    # Tạo ô nhập
+    entry = tk.Entry(root, width=17, font=("Arial", 12))
+    entry.place(x=120, y=y_position)
+    entries.append(entry)
+    y_position += 40
+# cột 2
+labels = ["Tên", "Số CMND", "Nơi Cấp"]
+entries = []
+y_position = 80
+for i, label in enumerate(labels):
+    # Tạo nhãn
+    tk.Label(root, text=label, font=("Arial", 11,"bold")).place(x=310, y=y_position)
+    # Tạo ô nhập
+    entry = tk.Entry(root, width=17, font=("Arial", 12))
+    entry.place(x=400, y=y_position)
+    entries.append(entry)
+    y_position += 40
+# Cột 3
+y_positions= 120
+labels = ["Ngày sinh", "Ngày cấp"]
+entries = []
+for i, label in enumerate(labels):
+    # Tạo nhãn
+    tk.Label(root, text=label, font=("Arial", 11,"bold")).place(x=565, y=y_positions)
+    # Tạo ô nhập
+    entry = tk.Entry(root, width=17, font=("Arial", 12))
+    entry.place(x=655, y=y_positions)
+    entries.append(entry)
+    y_positions += 40
+# Giới tính
+selected_option = tk.StringVar(value="Không chọn")
+
+radio1 = tk.Radiobutton(root, text="Nam", variable=selected_option, value="Tùy chọn 1",font=("Arial",10,"bold"))
+radio2 = tk.Radiobutton(root, text="Nữ", variable=selected_option, value="Tùy chọn 2",font=("Arial",10,"bold"))
+radio1.place(x =600,y= 85 )
+radio2.place(x =670,y=85)
+root.mainloop()
